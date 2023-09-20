@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Morse Übersetzer</title>
+    <link rel="icon" type="image/x-icon" href="/pngegg.ico">
+    <link rel="stylesheet" href="stylesheet.css" />
+
+</head>
+
+<body>
+    <header>
+        <h1>Morsen</h1>
+    </header>
+
+    <div id="container">
+        <div id="explanation">
+            <h2>Morsen im Militär</h2>
+            <br>
+            <p>Heutzutage braucht man bei den Funkaufklärern kein Morsen mehr. Trotzdem ist es bei Amateurfunkern immer
+                noch beliebt, da CW für "continuous wave" (A1A) eine sehr geringe Bandbreite hat und wenig Leistung
+                braucht. Auch im Rekrutenbehelf findet man eine Tabelle zum Morsen. Hier findest du eine Tabelle zum
+                Morse-Alphabet und zum NATO-Alphabet. Das NATO-Alphabet ist essentiell für Funkaufklärer, da man damit
+                eindeutig Buchstaben sagen kann. Bei schlechtem Signal können dadurch Buchstaben wie "M" und "N"
+                unterschieden werden, sodass alles klar buchstabiert werden kann.</p>
+            <br>
+            <table>
+                <tr>
+                    <th>Buchstabe</th>
+                    <th>NATO-Alphabet</th>
+                    <th>Morsecode</th>
+                </tr>
+                <tr>
+                    <td>A</td>
+                    <td>Alfa</td>
+                    <td>.-</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>Bravo</td>
+                    <td>-...</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>Charlie</td>
+                    <td>-.-.</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>Delta</td>
+                    <td>-..</td>
+                </tr>
+                <tr>
+                    <td>E</td>
+                    <td>Echo</td>
+                    <td>.</td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td>Foxtrot</td>
+                    <td>..-.</td>
+                </tr>
+                <tr>
+                    <td>G</td>
+                    <td>Golf</td>
+                    <td>--.</td>
+                </tr>
+                <tr>
+                    <td>H</td>
+                    <td>Hotel</td>
+                    <td>....</td>
+                </tr>
+                <tr>
+                    <td>I</td>
+                    <td>India</td>
+                    <td>..</td>
+                </tr>
+                <tr>
+                    <td>J</td>
+                    <td>Juliett</td>
+                    <td>.---</td>
+                </tr>
+                <tr>
+                    <td>K</td>
+                    <td>Kilo</td>
+                    <td>-.-</td>
+                </tr>
+                <tr>
+                    <td>L</td>
+                    <td>Lima</td>
+                    <td>.-..</td>
+                </tr>
+                <tr>
+                    <td>M</td>
+                    <td>Mike</td>
+                    <td>--</td>
+                </tr>
+                <tr>
+                    <td>N</td>
+                    <td>November</td>
+                    <td>-.</td>
+                </tr>
+                <tr>
+                    <td>O</td>
+                    <td>Oscar</td>
+                    <td>---</td>
+                </tr>
+                <tr>
+                    <td>P</td>
+                    <td>Papa</td>
+                    <td>.--.</td>
+                </tr>
+                <tr>
+                    <td>Q</td>
+                    <td>Quebec</td>
+                    <td>--.-</td>
+                </tr>
+                <tr>
+                    <td>R</td>
+                    <td>Romeo</td>
+                    <td>.-.</td>
+                </tr>
+                <tr>
+                    <td>S</td>
+                    <td>Sierra</td>
+                    <td>...</td>
+                </tr>
+                <tr>
+                    <td>T</td>
+                    <td>Tango</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>U</td>
+                    <td>Uniform</td>
+                    <td>..-</td>
+                </tr>
+                <tr>
+                    <td>V</td>
+                    <td>Victor</td>
+                    <td>...-</td>
+                </tr>
+                <tr>
+                    <td>W</td>
+                    <td>Whiskey</td>
+                    <td>.--</td>
+                </tr>
+                <tr>
+                    <td>X</td>
+                    <td>X-Ray</td>
+                    <td>-..-</td>
+                </tr>
+                <tr>
+                    <td>Y</td>
+                    <td>Yankee</td>
+                    <td>-.--</td>
+                </tr>
+                <tr>
+                    <td>Z</td>
+                    <td>Zulu</td>
+                    <td>--..</td>
+                </tr>
+            </table>
+
+        </div>
+        <div id="tool">
+            <h2>Morsecode praktisch üben und anwenden</h2>
+            <br>
+            <p>Hier kannst du mittels diesem Tool selbst Morsecode generieren lassen, zurück übersetzen und den Ton
+                abspielen. Mithilfe der Sliders kannst du diverse Einstellungen vornehmen. Viel Spass : &#41;</p>
+            <br>
+
+            <br>
+            <div id="boxes">
+
+                <form name="A_Form" action="">
+                    <textarea name="alphabetic" id="alpha" cols="30" rows="10"></textarea>
+                    <br>
+                    <input class="button" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
+                </form>
+                <form name="M_Form" action="">
+                    <textarea name="morsecode" id="morse" cols="30" rows="10"></textarea>
+                    <br>
+                    <input class="button" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
+                </form>
+
+            </div>
+            <br>
+            <p>Hier kannst du die Einstellungen für die Tonlänge ändern und dir nach dem generieren des Morse-Codes
+                kannst du dir die Audio-Datei anhören.</p>
+            <br>
+            <div class="slidecontainer">
+                <div id="Sign_Pause">
+                    <p>Länge einer Einheit (Punkt)</p>
+                    <br>
+                    <input type="range" min="0" max="2000" class="slider" id="sign">
+                    <br>
+                    <p>Value: <span id="sign_value"></span> ms</p>
+                </div>
+                <div id="Word_Pause">
+                    <p>Faktor der Einheit für den Strich</p>
+                    <br>
+                    <input type="range" min="0" max="4000" class="slider" id="word">
+                    <br>
+                    <p>Value: <span id="word_value"></span> ms</p>
+                    <br>
+                </div>
+            </div>
+            <div class="buttons">
+                <input class="button" type="button" value="Play" onclick="generate_audio()">
+                <input class="button" type="button" value="Download">
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+<script src="script.js"></script>
+
+</html>
