@@ -6,11 +6,12 @@ It has already following features:
 <ul>
 <li>translating alhpanumeric to morse and back</li>
 <li>generating an audio of the morse code</li>
-<li>adjusting the length of a unit for the audio</li>
+<li>adjusting how many words per minute for the audio</li>
 </ul>
 To be implemented:
 <ul>
   <li>donwloadable audio file</li>
   <li>more customization</li>
+  <li>pause button</li>
   <li>better design</li>
 </ul>

@@ -1,15 +1,15 @@
 var translation_string = "";
 var translated_morse = "";
 
-//without a function
-var slider_sign = document.getElementById("sign");
+//without a function for the slider
+var slider_wpm = document.getElementById("WPM");
 var slider_word = document.getElementById("word");
-var output_sign = document.getElementById("sign_value");
+var output_wpm = document.getElementById("WPM_value");
 var output_word = document.getElementById("word_value");
-var length_unit = 500;
+var wpm = 20;
 
 var word_pause = 1000;
-output_sign.innerHTML = display_value(slider_sign, output_sign, length_unit);
+output_wpm.innerHTML = display_value(slider_wpm, output_wpm, wpm);
 output_word.innerHTML = display_value(slider_word, output_word, word_pause);
 
 function display_value(slider, output, LENGTH_VALUE) {
@@ -123,9 +123,9 @@ function AlphaToMorse() {
 }
 
 function generate_audio() {
-  console.log(slider_sign.value);
-  var unit_sec = slider_sign.value / 1000;
-  console.log(unit_sec);
+  console.log(slider_wpm.value);
+  var unit = 60/(50*slider_sign.value);
+  console.log(unit);
   var delay = 0;
   const synth = new Tone.Synth().toDestination(); //for the sound
   const now = Tone.now(); //starts a time tracker
@@ -144,12 +144,12 @@ function generate_audio() {
   //const sign_array = [".", "-", " ", "."];
   for (let i = 0; i < sign_array.length; i++) {
     if (sign_array[i] == ".") {
-      sound_creator(unit_sec);
-      delay += 2 * unit_sec;
+      sound_creator(unit);
+      delay += 2 * unit;
       console.log(delay);
     } else if (sign_array[i] == "-") {
-      sound_creator(3 * unit_sec);
-      delay += 4 * unit_sec;
+      sound_creator(3 * unit);
+      delay += 4 * unit;
       console.log("yeah");
 
       //add one pause_length unit
@@ -157,10 +157,10 @@ function generate_audio() {
       if (sign_array[i + 1] == "/" || sign_array[i - 1] == "/") {
         //do nothing
       } else {
-        delay += 2 * unit_sec;
+        delay += 2 * unit;
       }
     } else if (sign_array[i] == "/") {
-      delay += 6 * unit_sec;
+      delay += 6 * unit;
     }
   }
 }
