@@ -124,24 +124,28 @@ function AlphaToMorse() {
 
 function generate_audio() {
   console.log(slider_wpm.value);
-  var unit = 60/(50*slider_sign.value);
+  var unit = 60/(50*slider_wpm.value);
   console.log(unit);
   var delay = 0;
-  const synth = new Tone.Synth().toDestination(); //for the sound
+  const oscillator = new Tone.Oscillator({
+    type:'sine',
+    frequency:800,
+  
+  }).toDestination(); //for the sound
   const now = Tone.now(); //starts a time tracker
 
   function sound_creator(tone_length) {
     //sound creation
 
-    synth.triggerAttackRelease("C4", tone_length, now + delay);
-    Tone.start();
+    oscillator.triggerAttackRelease(440, tone_length, now + delay);
+    Oscillator.start();
     console.log("goes to function");
   }
 
   morse = document.M_Form.morse.value;
 
   sign_array = morse.split(""); //creates an array with all signs and spaces
-  //const sign_array = [".", "-", " ", "."];
+  
   for (let i = 0; i < sign_array.length; i++) {
     if (sign_array[i] == ".") {
       sound_creator(unit);
