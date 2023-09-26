@@ -123,60 +123,65 @@ function AlphaToMorse() {
 }
 
 function generate_audio() {
+  var i = 0;
   var unit = 60000 / (50 * slider_wpm.value);
-  console.log(unit);
+  // console.log(unit);
   var delay = 0;
   var pause = unit;
   const oscillator = new Tone.Oscillator(440, "sine").toDestination(); //for the sound
 
-  //const now = oscillator.now(); //starts a time tracker
-  looping();
+  //const now = oscillator.now(); //starts a time
 
   function sound_creator(tone_length, pause_length) {
     //sound creation
     oscillator.start();
-
     setTimeout(() => {
       oscillator.stop();
     }, tone_length);
 
     setTimeout(() => {
       looping();
-    }, pause_length);
+    }, tone_length + pause_length);
+    console.log(tone_length + pause_length);
   }
 
   //creates an array with all signs and spaces
+  morse = document.M_Form.morse.value;
+
+  var sign_array = morse.split("");
 
   function looping() {
-    morse = document.M_Form.morse.value;
+    console.log(i);
+    console.log("length = " + sign_array.length);
+    if (i == sign_array.length - 1) {
+      return;
+    }
+    //for (let i = 0; i < sign_array.length; i++) {
+    pause = unit;
+    if (sign_array[i + 1] == " ") {
+      pause = 3 * unit;
+    }
+    if (sign_array[i + 1] == " " && sign_array[i + 2] == "/") {
+      pause = 7 * unit;
+    }
+    if (sign_array[i] == ".") {
+      sound_creator(unit, pause);
+      console.log("initialized");
+    }
+    if (sign_array[i] == "-") {
+      sound_creator(3 * unit, pause);
 
-    var sign_array = morse.split("");
+      //add one pause_length unit
+    }
+    pause = unit;
+    if (sign_array[i + 1] == " ") {
+      i += 1;
+    }
+    if (sign_array[i + 1] == " " && sign_array[i + 2] == "/") {
+      i += 3;
+    }
 
-    for (let i = 0; i < sign_array.length; i++) {
-      pause = unit;
-      if (sign_array[i + 1] == " " && sign_array[i + 2] == "/") {
-        pause = 7 * unit;
-        i += 2;
-      } else if (sign_array[i + 1] == " ") {
-        pause = 3 * unit;
-        i += 1;
-      }
-
-      if (sign_array[i] == ".") {
-        sound_creator(unit, pause);
-      } else if (sign_array[i] == "-") {
-        sound_creator(3 * unit, pause);
-
-        //add one pause_length unit
-      }
-      //*else if (sign_array[i] == " ") {
-      /*if (sign_array[i + 1] == "/" || sign_array[i - 1] == "/") {
-        //do nothing
-      } else {
-        delay += 2 * unit;
-      }*/
-    } /*else if (sign_array[i] == "/") {
-        delay += 6 * unit;
-      }*/
+    i++;
   }
+  looping();
 }
