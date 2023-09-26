@@ -123,48 +123,60 @@ function AlphaToMorse() {
 }
 
 function generate_audio() {
-  console.log(slider_wpm.value);
-  var unit = 60000/(50*slider_wpm.value);
+  var unit = 60000 / (50 * slider_wpm.value);
   console.log(unit);
   var delay = 0;
-  const synth = new Tone.Synth().toDestination();
-  const oscillator = new Tone.Oscillator(440, 'sine'); //for the sound
+  var pause = unit;
+  const oscillator = new Tone.Oscillator(440, "sine").toDestination(); //for the sound
 
-  const now = Tone.now(); //starts a time tracker
+  //const now = oscillator.now(); //starts a time tracker
+  looping();
 
-  function sound_creator(tone_length) {
+  function sound_creator(tone_length, pause_length) {
     //sound creation
-
     oscillator.start();
+
     setTimeout(() => {
       oscillator.stop();
     }, tone_length);
-    console.log("goes to function");
+
+    setTimeout(() => {
+      looping();
+    }, pause_length);
   }
 
-  morse = document.M_Form.morse.value;
+  //creates an array with all signs and spaces
 
-  sign_array = morse.split(""); //creates an array with all signs and spaces
-  
-  for (let i = 0; i < sign_array.length; i++) {
-    if (sign_array[i] == ".") {
-      sound_creator(unit);
-      delay += 2 * unit;
-      console.log(delay);
-    } else if (sign_array[i] == "-") {
-      sound_creator(3 * unit);
-      delay += 4 * unit;
-      console.log("yeah");
+  function looping() {
+    morse = document.M_Form.morse.value;
 
-      //add one pause_length unit
-    } else if (sign_array[i] == " ") {
-      if (sign_array[i + 1] == "/" || sign_array[i - 1] == "/") {
+    var sign_array = morse.split("");
+
+    for (let i = 0; i < sign_array.length; i++) {
+      pause = unit;
+      if (sign_array[i + 1] == " " && sign_array[i + 2] == "/") {
+        pause = 7 * unit;
+        i += 2;
+      } else if (sign_array[i + 1] == " ") {
+        pause = 3 * unit;
+        i += 1;
+      }
+
+      if (sign_array[i] == ".") {
+        sound_creator(unit, pause);
+      } else if (sign_array[i] == "-") {
+        sound_creator(3 * unit, pause);
+
+        //add one pause_length unit
+      }
+      //*else if (sign_array[i] == " ") {
+      /*if (sign_array[i + 1] == "/" || sign_array[i - 1] == "/") {
         //do nothing
       } else {
         delay += 2 * unit;
-      }
-    } else if (sign_array[i] == "/") {
-      delay += 6 * unit;
-    }
+      }*/
+    } /*else if (sign_array[i] == "/") {
+        delay += 6 * unit;
+      }*/
   }
 }
