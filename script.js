@@ -124,21 +124,21 @@ function AlphaToMorse() {
 
 function generate_audio() {
   console.log(slider_wpm.value);
-  var unit = 60/(50*slider_wpm.value);
+  var unit = 60000/(50*slider_wpm.value);
   console.log(unit);
   var delay = 0;
-  const oscillator = new Tone.Oscillator({
-    type:'sine',
-    frequency:800,
-  
-  }).toDestination(); //for the sound
+  const synth = new Tone.Synth().toDestination();
+  const oscillator = new Tone.Oscillator(440, 'sine'); //for the sound
+
   const now = Tone.now(); //starts a time tracker
 
   function sound_creator(tone_length) {
     //sound creation
 
-    oscillator.triggerAttackRelease(440, tone_length, now + delay);
-    Oscillator.start();
+    oscillator.start();
+    setTimeout(() => {
+      oscillator.stop();
+    }, tone_length);
     console.log("goes to function");
   }
 
