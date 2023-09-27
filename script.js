@@ -133,6 +133,15 @@ function generate_audio() {
   //const now = oscillator.now(); //starts a time
 
   function sound_creator(tone_length, pause_length) {
+    //pause organisation 
+    if (sign_array[i + 1] == " ") {
+      i += 1;//skip the next part of the array (" ")
+    }
+    if (sign_array[i + 1] == " " && sign_array[i + 2] == "/") {
+      i += 2;//skipt the next three parts of the arry (/, " ")
+    }
+
+    i++; //increase the value anyways to to to next position
     //sound creation
     oscillator.start();
     setTimeout(() => {
@@ -173,15 +182,7 @@ function generate_audio() {
 
       //add one pause_length unit
     }
-    pause = unit;
-    if (sign_array[i + 1] == " ") {
-      i += 1;
-    }
-    if (sign_array[i + 1] == " " && sign_array[i + 2] == "/") {
-      i += 3;
-    }
-
-    i++;
+    
   }
   looping();
 }
