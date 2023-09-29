@@ -38,6 +38,19 @@ header {
 a {
   text-decoration: none;
 }
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th, .table td {
+  border: 1px solid #bbb;
+  padding: 10px;
+  text-align: left;
+}
+
+
 #explanation {
   background: linear-gradient(powderblue, lightyellow);
   width: 90%;
@@ -45,28 +58,7 @@ a {
   padding: 20px;
   border-radius: 20px;
 }
-table {
-  align-items: center;
-}
-table,
-tr,
-th,
-td {
-  border: 3px solid black;
-  border-collapse: collapse;
-  margin: 20px;
-  border-radius: 1px;
-  margin: auto;
-}
-td,
-td,
-th {
-  padding: 5px;
-  text-align: center;
-}
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
+
 
 #tool {
   background-color: powderblue;
@@ -109,6 +101,17 @@ tr:nth-child(even) {
 @media (max-width: 800px) {
   #morse,
   #alpha {
-    font-size: 100%;
+    font-size: 80%;
+  }
+
+  #tool {
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px;
+  }
+
+  #alpha,
+  #morse {
+    width: 90%;
   }
 }
