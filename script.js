@@ -202,21 +202,37 @@ function generate_audio() {
 }
 
 function download_audio() {
+var delay = 0;
+var unit = 60 / (50 * slider_wpm.value);
+var tone_length = unit;
+morse = document.M_Form.morse.value;
+const synth = new Tone.Synth().toDestination().toFrequency();
+const now = Tone.now()
+  var sign_array = morse.split("");
 
-  function immediate_audio() {
-
+  function produce(length, delay) {
+    synth.triggerAttackRelease(400, length, now +delay);
   }
   recorder.start();
   for(let i = 0; i < sign_array.length; i++)
   {
-    if(sign_array.length == ".")
-    var tone = unit;
-// generate a few notes
-synth.triggerAttackRelease("C3", 0.5);
-synth.triggerAttackRelease("C4", 0.5, "+1");
-synth.triggerAttackRelease("C5", 0.5, "+2");
-// wait for the notes to end and stop the recording
-
+    if(sign_array[i] == "."){
+      tone_length = unit;
+      delay += 2* unit;
+      produce(unit, delay);
+    }
+    if(sign_array[i] == "-"){
+      tone_length = 3* unit;
+      delay += 4*unit;
+  }
+  else if (sign_array[i] == " ") {
+    if (sign_array[i + 1] == "/" || sign_array[i - 1] == "/") {
+      //do nothing
+    } else {
+      delay += 2 * unit;
+    }
+  } else if (sign_array[i] == "/") {
+    delay += 6 * unit;
   }
 
   setTimeout(async () => {
@@ -229,4 +245,5 @@ synth.triggerAttackRelease("C5", 0.5, "+2");
     anchor.href = url;
     anchor.click();
   }, 4000);
+}
 }
