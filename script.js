@@ -7,6 +7,9 @@ var slider_word = document.getElementById("word");
 var output_wpm = document.getElementById("WPM_value");
 var output_word = document.getElementById("word_value");
 var wpm = 20;
+var PlayPause = getElementByid("play_pause");
+var PLAY = true;
+
 
 var word_pause = 1000;
 output_wpm.innerHTML = display_value(slider_wpm, output_wpm, wpm);
@@ -120,8 +123,19 @@ function AlphaToMorse() {
   document.getElementById("morse").value = translation_string.trim();
   translation_string = "";
 }
-
+function pause_audio() {
+  var play = "<button type='button' class='button' onclick='continue_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
+  PlayPause.innerHTML = play;
+  PLAY = false;
+}
+function continue_audio() {
+  var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
+  PLAY = true;
+}
 function generate_audio() {
+  
+  var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
+  PlayPause.innerHTML = pause;
   var index = 0;
   var tone = unit;
   var unit = 60000 / (50 * slider_wpm.value);
@@ -185,4 +199,34 @@ function generate_audio() {
     }
   }
   looping();
+}
+
+function download_audio() {
+
+  function immediate_audio() {
+
+  }
+  recorder.start();
+  for(let i = 0; i < sign_array.length; i++)
+  {
+    if(sign_array.length == ".")
+    var tone = unit;
+// generate a few notes
+synth.triggerAttackRelease("C3", 0.5);
+synth.triggerAttackRelease("C4", 0.5, "+1");
+synth.triggerAttackRelease("C5", 0.5, "+2");
+// wait for the notes to end and stop the recording
+
+  }
+
+  setTimeout(async () => {
+    // the recorded audio is returned as a blob
+    const recording = await recorder.stop();
+    // download the recording by creating an anchor element and blob url
+    const url = URL.createObjectURL(recording);
+    const anchor = document.createElement("a");
+    anchor.download = "recording.webm";
+    anchor.href = url;
+    anchor.click();
+  }, 4000);
 }
