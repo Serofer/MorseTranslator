@@ -1,14 +1,14 @@
 var translation_string = "";
 var translated_morse = "";
 
-//without a function for the slider
+
+//slider information
 var slider_wpm = document.getElementById("WPM");
 var slider_word = document.getElementById("word");
 var output_wpm = document.getElementById("WPM_value");
 var output_word = document.getElementById("word_value");
 var wpm = 20;
-var PlayPause = getElementByid("play_pause");
-var PLAY = true;
+
 
 
 var word_pause = 1000;
@@ -62,6 +62,7 @@ const dictionary_A = {
   0: "-----",
   " ": "/",
 };
+
 const dictionary_B = {
   ".-": "a",
   "-...": "b",
@@ -91,7 +92,7 @@ const dictionary_B = {
   "--..": "z",
   "/": " ",
 };
-
+//translate Morse to normal
 function MorseToAlpha() {
   //document.A_Form.alpha.value = "";
   //document.getElementById("A_Form").reset();
@@ -110,6 +111,7 @@ function MorseToAlpha() {
   translated_morse = "";
 }
 
+//translate normal to morse
 function AlphaToMorse() {
   //document.getElementById("alpha").reset();
   text = document.A_Form.alpha.value.toUpperCase();
@@ -123,32 +125,45 @@ function AlphaToMorse() {
   document.getElementById("morse").value = translation_string.trim();
   translation_string = "";
 }
+
+//everything for the AUDIO ----------------------------------------------------------------------------------------------------------------
+var index = 0;
+var tone = unit;
+var unit = 60000 / (50 * slider_wpm.value);
+// console.log(unit);
+var pause = unit;
+
+var PlayPause = getElementById("play_pause");
+var PLAY = true;
+var current_situation = "loop";
+
+
+//pause the audio
 function pause_audio() {
   var play = "<button type='button' class='button' onclick='continue_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
   PlayPause.innerHTML = play;
   PLAY = false;
+
 }
-function continue_audio() {
+
+function continue_audio() { //continue the staff: problem with the loop, initialize the current function with if statmentes would work.
   var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
   PLAY = true;
+  switch (current_situation) {
+    case loop:
+      looping();
+      break;
+    case production:
+      sound_creator(tone,pause);
+  }
 }
-function generate_audio() {
+
+//creates the sound then runs the loop function to generate the next
+//tests if the pause button is pressed.
+function sound_creator(tone_length, pause_length) {
   
-  var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
-  PlayPause.innerHTML = pause;
-  var index = 0;
-  var tone = unit;
-  var unit = 60000 / (50 * slider_wpm.value);
-  // console.log(unit);
-  var pause = unit;
-  //for the sound
-  morse = document.M_Form.morse.value;
-
-  var sign_array = morse.split("");
-
-  //const now = oscillator.now(); //starts a time
-
-  function sound_creator(tone_length, pause_length) {
+  current_situation = "production";
+  if(PLAY){
     //pause organisation
     console.log("sound_generator");
     if (sign_array[index + 1] == " ") {
@@ -170,14 +185,33 @@ function generate_audio() {
       looping();
       console.log("now");
     }, tone_length + pause_length);
+
   }
+  
+}
 
-  //creates an array with all signs and spaces
+//initialization of audio
+function init_audio() {
+  
+  var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
+  PlayPause.innerHTML = pause;
 
-  function looping() {
-    console.log(sign_array[index]);
 
-    //for (let i = 0; i < sign_array.length; i++) {
+  //for the sound
+  morse = document.M_Form.morse.value;
+
+  var sign_array = morse.split("");
+
+  //const now = oscillator.now(); //starts a time
+
+  //start the loop
+  looping();
+}
+
+//creates an array with all signs and spaces
+function looping() {
+  current_situation = "loop";
+  if(play){
     pause = unit;
     if (sign_array[index + 1] == " ") {
       pause = 3 * unit;
@@ -192,15 +226,15 @@ function generate_audio() {
     if (sign_array[index] == "-") {
       tone = 3 * unit;
 
-      //add one pause_length unit
+    //add one pause_length unit
     }
     if (sign_array[index] == "." || sign_array[index] == "-") {
       sound_creator(tone, pause);
     }
   }
-  looping();
 }
 
+//should produce an audio file to download via recorder.start() from Tone.js
 function download_audio() {
 var delay = 0;
 var unit = 60 / (50 * slider_wpm.value);
@@ -208,11 +242,12 @@ var tone_length = unit;
 morse = document.M_Form.morse.value;
 const synth = new Tone.Synth().toDestination().toFrequency();
 const now = Tone.now()
-  var sign_array = morse.split("");
+var sign_array = morse.split("");
 
   function produce(length, delay) {
     synth.triggerAttackRelease(400, length, now +delay);
   }
+
   recorder.start();
   for(let i = 0; i < sign_array.length; i++)
   {
