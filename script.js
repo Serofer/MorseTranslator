@@ -128,6 +128,8 @@ function AlphaToMorse() {
 }
 
 //everything for the AUDIO ----------------------------------------------------------------------------------------------------------------
+
+
 var index = 0;
 var unit = 0;
 var tone = unit;
@@ -138,6 +140,12 @@ var PlayPause = document.getElementById("play_pause");
 var PLAY = true;
 var current_situation = "loop";
 
+
+//mark the current position during audio
+
+function mark(){
+  sign_array[index];
+}
 
 //pause the audio
 function pause_audio() {
