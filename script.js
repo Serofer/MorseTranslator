@@ -129,8 +129,8 @@ function AlphaToMorse() {
 
 //everything for the AUDIO ----------------------------------------------------------------------------------------------------------------
 var index = 0;
+var unit = 0;
 var tone = unit;
-var unit = 60000 / (50 * slider_wpm.value);
 // console.log(unit);
 var pause = unit;
 
@@ -151,6 +151,7 @@ function pause_audio() {
 function continue_audio() { //continue the staff: problem with the loop, initialize the current function with if statmentes would work.
   console.log("continue AUDIO")
   var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
+  PlayPause.innerHTML = pause;
   PLAY = true;
   switch (current_situation) {
     case "loop":
@@ -185,11 +186,20 @@ function sound_creator(tone_length, pause_length) {
       oscillator.stop();
     }, tone_length);
 
-    setTimeout(() => {
-      looping();
-      console.log("now");
-    }, tone_length + pause_length);
+    if(index = sign_array.length-1){
 
+        play = "<button type='button' class='button' onclick='init_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
+        PlayPause.innerHTML = play;
+    }
+    else {
+      setTimeout(() => {
+        looping();
+        console.log("now");
+      }, tone_length + pause_length);
+  
+
+    }
+    
   }
   
 }
@@ -197,9 +207,11 @@ function sound_creator(tone_length, pause_length) {
 //initialization of audio
 function init_audio() {
   console.log("initialized audio");
+  index=0;
   
   var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
   PlayPause.innerHTML = pause;
+  unit = 60000 / (50 * slider_wpm.value);
 
 
   //for the sound
@@ -239,6 +251,8 @@ function looping() {
     }
   }
 }
+
+
 
 //should produce an audio file to download via recorder.start() from Tone.js
 function download_audio() {
