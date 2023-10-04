@@ -153,11 +153,12 @@ function continue_audio() { //continue the staff: problem with the loop, initial
   var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
   PLAY = true;
   switch (current_situation) {
-    case loop:
+    case "loop":
       looping();
       break;
-    case production:
+    case "production":
       sound_creator(tone,pause);
+      break;
   }
 }
 
