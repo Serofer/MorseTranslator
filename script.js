@@ -1,5 +1,6 @@
 var translation_string = "";
 var translated_morse = "";
+let sign_array = [];
 
 
 //slider information
@@ -203,7 +204,7 @@ function init_audio() {
   //for the sound
   morse = document.M_Form.morse.value;
 
-  var sign_array = morse.split("");
+  sign_array = morse.split("");
 
   //const now = oscillator.now(); //starts a time
 
