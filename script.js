@@ -186,7 +186,7 @@ function sound_creator(tone_length, pause_length) {
       oscillator.stop();
     }, tone_length);
 
-    if(index = sign_array.length-1){
+    if(index == sign_array.length-1){
 
         play = "<button type='button' class='button' onclick='init_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
         PlayPause.innerHTML = play;
