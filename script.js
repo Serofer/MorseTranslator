@@ -140,6 +140,7 @@ var current_situation = "loop";
 
 //pause the audio
 function pause_audio() {
+  console.log("Audio should be paused");
   var play = "<button type='button' class='button' onclick='continue_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
   PlayPause.innerHTML = play;
   PLAY = false;
@@ -147,6 +148,7 @@ function pause_audio() {
 }
 
 function continue_audio() { //continue the staff: problem with the loop, initialize the current function with if statmentes would work.
+  console.log("continue AUDIO")
   var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
   PLAY = true;
   switch (current_situation) {
@@ -161,7 +163,7 @@ function continue_audio() { //continue the staff: problem with the loop, initial
 //creates the sound then runs the loop function to generate the next
 //tests if the pause button is pressed.
 function sound_creator(tone_length, pause_length) {
-  
+  console.log("in the creation");
   current_situation = "production";
   if(PLAY){
     //pause organisation
@@ -192,6 +194,7 @@ function sound_creator(tone_length, pause_length) {
 
 //initialization of audio
 function init_audio() {
+  console.log("initialized audio");
   
   var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
   PlayPause.innerHTML = pause;
@@ -210,6 +213,7 @@ function init_audio() {
 
 //creates an array with all signs and spaces
 function looping() {
+  console.log("in the algorithm");
   current_situation = "loop";
   if(play){
     pause = unit;
