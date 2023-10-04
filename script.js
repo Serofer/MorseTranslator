@@ -215,7 +215,7 @@ function init_audio() {
 function looping() {
   console.log("in the algorithm");
   current_situation = "loop";
-  if(play){
+  if(PLAY){
     pause = unit;
     if (sign_array[index + 1] == " ") {
       pause = 3 * unit;
