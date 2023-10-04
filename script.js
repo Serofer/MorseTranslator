@@ -10,10 +10,10 @@ var output_word = document.getElementById("word_value");
 var wpm = 20;
 
 
-
-var word_pause = 1000;
+//var word_pause = 1000;
 output_wpm.innerHTML = display_value(slider_wpm, output_wpm, wpm);
-output_word.innerHTML = display_value(slider_word, output_word, word_pause);
+
+//output_word.innerHTML = display_value(slider_word, output_word, word_pause);
 
 function display_value(slider, output, LENGTH_VALUE) {
   slider.oninput = function () {
@@ -133,7 +133,7 @@ var unit = 60000 / (50 * slider_wpm.value);
 // console.log(unit);
 var pause = unit;
 
-var PlayPause = getElementById("play_pause");
+var PlayPause = document.getElementById("play_pause");
 var PLAY = true;
 var current_situation = "loop";
 
