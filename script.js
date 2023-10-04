@@ -194,7 +194,7 @@ function sound_creator(tone_length, pause_length) {
     else {
       setTimeout(() => {
         looping();
-        console.log("now");
+       
       }, tone_length + pause_length);
   
 
