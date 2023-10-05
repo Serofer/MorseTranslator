@@ -144,7 +144,7 @@ var current_situation = "loop";
 //mark the current position during audio
 
 function mark(){
-  sign_array[index];
+  
 }
 
 //pause the audio
@@ -264,6 +264,8 @@ function looping() {
 
 //should produce an audio file to download via recorder.start() from Tone.js
 function download_audio() {
+
+/*
 var delay = 0;
 var unit = 60 / (50 * slider_wpm.value);
 var tone_length = unit;
@@ -308,5 +310,42 @@ var sign_array = morse.split("");
     anchor.href = url;
     anchor.click();
   }, 4000);
+}*/
+
+
+
+//CHatgpt version
+
+const Tone = require('tone');
+
+// Erstellen Sie den Synthesizer
+const synth = new Tone.Synth().toMaster();
+
+// Definieren Sie die Einstellungen für den Synthesizer
+synth.oscillator.type = 'sine';
+synth.envelope.attack = 0.2;
+synth.envelope.decay = 0.1;
+synth.envelope.sustain = 0.5;
+synth.envelope.release = 1;
+
+// Spielen Sie einen einzelnen Ton
+synth.triggerAttackRelease('C4', '4n', Tone.now());
+
+// Generieren Sie die Audio-Datei
+const buffer = new Tone.Buffer().toDestination();
+Tone.Offline(() => {
+  // Spielen Sie den Ton
+  synth.triggerAttackRelease('C4', '4n', 0);
+}, '4n').then(buffer => {
+  // Exportieren Sie die generierte Audio-Datei
+  Tone.Buffer.exportToWav(buffer).then(data => {
+    const url = Tone.Buffer.toBlobURL(data);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'synth_tone.wav';
+    link.click();
+  });
+});
 }
-}
+
+
