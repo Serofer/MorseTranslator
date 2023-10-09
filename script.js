@@ -146,6 +146,7 @@ var current_situation = "loop";
 //mark the current position during audio
 
 function mark(){
+  console.log("marking");
   //new field with the mark function
   hilite_field = document.getElementById("highlights");
   var text = "";
@@ -191,7 +192,7 @@ function pause_audio() {
 }
 
 function continue_audio() { //continue the staff: problem with the loop, initialize the current function with if statmentes would work.
-  console.log("continue AUDIO")
+  //console.log("continue AUDIO")
   var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
   PlayPause.innerHTML = pause;
   PLAY = true;
@@ -209,11 +210,11 @@ function continue_audio() { //continue the staff: problem with the loop, initial
 //tests if the pause button is pressed.
 function sound_creator(tone_length, pause_length) {
   mark();
-  console.log("in the creation");
+  //console.log("in the creation");
   current_situation = "production";
   if(PLAY){
     //pause organisation
-    console.log("sound_generator");
+    //console.log("sound_generator");
     if (sign_array[index + 1] == " ") {
       index += 1; //skip the next part of the array (" ")
     }
@@ -249,32 +250,36 @@ function sound_creator(tone_length, pause_length) {
 
 //initialization of audio
 function init_audio() {
-  morse = document.M_Form.morse.value;
+  if(document.M_Form.morse.value != ""){
+    morse = document.M_Form.morse.value;
 
   
 
 
-  sign_array = morse.split("");
-
-  console.log("initialized audio");
-  index=0;
+    sign_array = morse.split("");
   
-  var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
-  PlayPause.innerHTML = pause;
-  unit = 60000 / (50 * slider_wpm.value);
-
-
-  //for the sound
+    //console.log("initialized audio");
+    index=0;
+    
+    var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
+    PlayPause.innerHTML = pause;
+    unit = 60000 / (50 * slider_wpm.value);
   
-  //const now = oscillator.now(); //starts a time
+  
+    //for the sound
+    
+    //const now = oscillator.now(); //starts a time
+  
+    //start the loop
+    looping();
 
-  //start the loop
-  looping();
+  }
+
 }
 
 //creates an array with all signs and spaces
 function looping() {
-  console.log("in the algorithm");
+  //console.log("in the algorithm");
   current_situation = "loop";
   if(PLAY){
     pause = unit;
