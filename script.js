@@ -12,7 +12,7 @@ var slider_wpm = document.getElementById("WPM");
 var slider_word = document.getElementById("word");
 var output_wpm = document.getElementById("WPM_value");
 var output_word = document.getElementById("word_value");
-var wpm = 20;
+var wpm = 30;
 
 
 //var word_pause = 1000;

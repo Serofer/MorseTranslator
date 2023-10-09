@@ -195,9 +195,9 @@
                 </form>-->
 
                 <div id="alpha" contenteditable="true"></div>
-                <input class="button" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
+                <input class="button_translate" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
                 <div id="morse" contenteditable="true"></div>
-                <input class="button" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
+                <input class="button_translate" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
 
             </div>
             <br>
@@ -208,9 +208,9 @@
                 <div id="WordsPerMinute">
                     <p>Wörter pro Minute</p>
                     <br>
-                    <input type="range" min="1" max="100" class="slider" id="WPM">
+                    <input type="range" min="1" max="60" class="slider" id="WPM">
                     <br>
-                    <p>Value: <span id="WPM_value"></span> wpm</p>
+                    <p>Value: <span id="WPM_value">30</span> wpm</p>
                 </div>
                  <!--<div id="Word_Pause">
                     <p>Pause zwischen Wörtern</p>
@@ -222,7 +222,7 @@
                 </div>-->
             </div>
             <div class="buttons">
-                <p id="play_pause">
+                <div id="play_pause">
                 <button type="button" class="button" onclick="init_audio()">
                     <span class="glyphicon glyphicon-play"></span> Play
                   </button>
@@ -232,7 +232,10 @@
                         <span class="glyphicon glyphicon-stop"></span> Stop
                       </button>
                 </div>
-                <input class="button" type="button" value="Download" onclick="download_audio()">
+                <div id="download">
+                    <input class="button" type="button" value="Download" onclick="download_audio()">
+                </div>
+                
             </div>
         </div>
     </div>

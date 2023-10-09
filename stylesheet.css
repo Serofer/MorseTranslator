@@ -50,15 +50,21 @@ body{
   gap: 10px;
 }
 
-#alpha,
-#morse {
-  font-size: 16px;
-  padding: 10px;
-}
-
 .button {
   padding: 1%;
   font-size: 16px;
+
+}
+#play_pause, #stop, #download {
+  display:inline-block;
+  margin:10px;
+
+}
+
+.button_translate {
+  padding: 1%;
+  font-size: 16px;
+  width:200px;
 }
 
 .slidecontainer {
@@ -79,11 +85,13 @@ body{
 }
 
 #alpha, #morse {
+  font-size: 16px;
   width:300px;
   height:100px;
   background:#cccccc;
   padding:15px;
-  broder:3px solid blue;
+  border:3px solid blue;
+  overflow:auto;
 }
 #alpha:hover, #morse:hover {
   border:5px solid powderblue;
