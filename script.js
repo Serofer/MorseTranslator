@@ -3,6 +3,8 @@ var translated_morse = "";
 let sign_array = [];
 
 
+
+
 //slider information
 var slider_wpm = document.getElementById("WPM");
 var slider_word = document.getElementById("word");
@@ -144,15 +146,47 @@ var current_situation = "loop";
 //mark the current position during audio
 
 function mark(){
+  //new field with the mark function
+  hilite_field = document.getElementById("highlights");
+  var text = "";
+
+  for(let i=0;i<sign_array.length;i++){
+    let toAdd = "";
+
+    
+    if(i==index){
+      toAdd = "<span id ='high'>" + sign_array[i]+ "</span>";
+    }
+
+    else {
+      toAdd = "<span>"+sign_array[i] + "</span>";
+
+    }
+    text = text + toAdd;
+
+  }
+
+  hilite_field.innerHTML = text;
+
   
+  //trying it with github library
+  let tarea = document.getElementById("morse");
+  let hilite = new textHighlight(tarea);
+
+
+
+  //mark.js
 }
 
 //pause the audio
 function pause_audio() {
-  console.log("Audio should be paused");
-  var play = "<button type='button' class='button' onclick='continue_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
-  PlayPause.innerHTML = play;
-  PLAY = false;
+  if(document.M_Form.morse.value != ""){
+
+    console.log("Audio should be paused");
+    var play = "<button type='button' class='button' onclick='continue_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
+    PlayPause.innerHTML = play;
+    PLAY = false;
+  }
 
 }
 
@@ -174,6 +208,7 @@ function continue_audio() { //continue the staff: problem with the loop, initial
 //creates the sound then runs the loop function to generate the next
 //tests if the pause button is pressed.
 function sound_creator(tone_length, pause_length) {
+  mark();
   console.log("in the creation");
   current_situation = "production";
   if(PLAY){
@@ -185,7 +220,7 @@ function sound_creator(tone_length, pause_length) {
     if (sign_array[index] == " " && sign_array[index + 1] == "/") {
       index += 2; //skipt the next three parts of the array (/, " ")
     }
-
+    
     index++; //increase the value anyways to to to next position
     const oscillator = new Tone.Oscillator(440, "sine").toDestination();
     //sound creation
@@ -214,6 +249,13 @@ function sound_creator(tone_length, pause_length) {
 
 //initialization of audio
 function init_audio() {
+  morse = document.M_Form.morse.value;
+
+  
+
+
+  sign_array = morse.split("");
+
   console.log("initialized audio");
   index=0;
   
@@ -223,10 +265,7 @@ function init_audio() {
 
 
   //for the sound
-  morse = document.M_Form.morse.value;
-
-  sign_array = morse.split("");
-
+  
   //const now = oscillator.now(); //starts a time
 
   //start the loop

@@ -73,6 +73,11 @@ body{
   margin: 0;
 }
 
+#high {
+  display:inline;
+  background-color: #FFFF00;
+}
+
 @media (min-width: 768px) {
   #container {
     flex-direction: row;
