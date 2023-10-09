@@ -7,8 +7,6 @@
     <title>Morse Übersetzer</title>
     <link rel="icon" type="image/x-icon" href="/pngegg.ico">
     <link rel="stylesheet" href="stylesheet.css" />
-    <link href="texthighlighter.css" rel="stylesheet">
-    <script src="texthighlighter.js"></script>
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
@@ -185,7 +183,7 @@
             <br>
             <div id="boxes">
 
-                <form name="A_Form" action="">
+                <!--<form name="A_Form" action="">
                     <textarea name="alphabetic" id="alpha" cols="30" rows="10"></textarea>
                     <br>
                     <input class="button" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
@@ -194,7 +192,10 @@
                     <textarea name="morsecode" id="morse" cols="30" rows="10"></textarea>
                     <br>
                     <input class="button" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
-                </form>
+                </form>-->
+
+                <div id="alpha" contenteditable="true"></div>
+                <div id="morse" contenteditable="true"></div>
 
             </div>
             <br>
@@ -228,7 +229,6 @@
             </div>
             <div id="highlights"></div>
             <h1 contentEditable="true">Your Name</h1>
-    <div contentEditable="true">You Favorite Movie</div>
     <p contentEditable="true">Your Comment</p>
     <p><strong>Note:</strong> Click on the elements and type some text.</p>
         </div>

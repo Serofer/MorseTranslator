@@ -78,6 +78,13 @@ body{
   background-color: #FFFF00;
 }
 
+#alpha, #morse {
+  width:300px;
+  height:100px;
+  background:#cccccc;
+  padding:15px;
+}
+
 @media (min-width: 768px) {
   #container {
     flex-direction: row;

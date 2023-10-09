@@ -4,6 +4,8 @@ let sign_array = [];
 
 
 
+morse_field = document.getElementById("morse");
+alpha_field = document.getElementById("alpha");
 
 //slider information
 var slider_wpm = document.getElementById("WPM");
@@ -99,8 +101,10 @@ const dictionary_B = {
 function MorseToAlpha() {
   //document.A_Form.alpha.value = "";
   //document.getElementById("A_Form").reset();
-
-  morse = document.M_Form.morse.value;
+  
+  
+  //morse = document.M_Form.morse.value;
+  morse = morse_field.textContent;
 
   code_array = morse.split(" ");
 
@@ -110,14 +114,16 @@ function MorseToAlpha() {
     }
   }
   console.log(translated_morse);
-  document.getElementById("alpha").value = translated_morse.trim();
+  morse_field.innerHTML = translated_morse;
+  //document.getElementById("alpha").value = translated_morse.trim();
   translated_morse = "";
 }
 
 //translate normal to morse
 function AlphaToMorse() {
   //document.getElementById("alpha").reset();
-  text = document.A_Form.alpha.value.toUpperCase();
+  text = alpha_field.textContent;
+  //text = document.A_Form.alpha.value.toUpperCase();
   //document.getElementById("morse").textContent = "";
   for (let char of text) {
     if (dictionary_A[char]) {
@@ -125,7 +131,9 @@ function AlphaToMorse() {
     }
   }
   console.log(translation_string);
-  document.getElementById("morse").value = translation_string.trim();
+
+  alpha_field.innerHTML = translation_string.trim();
+  //document.getElementById("morse").value = translation_string.trim();
   translation_string = "";
 }
 
@@ -148,26 +156,21 @@ var current_situation = "loop";
 function mark(){
   console.log("marking");
   //new field with the mark function
-  hilite_field = document.getElementById("highlights");
+  
   var text = "";
 
   for(let i=0;i<sign_array.length;i++){
     let toAdd = "";
-
-    
-    if(i==index){
+    if(i==index && index != sign_array.length){
       toAdd = "<span id ='high'>" + sign_array[i]+ "</span>";
     }
-
     else {
       toAdd = "<span>"+sign_array[i] + "</span>";
-
     }
     text = text + toAdd;
-
   }
 
-  hilite_field.innerHTML = text;
+  morse_field.innerHTML = text;
 
   
   //trying it with github library
@@ -181,7 +184,7 @@ function mark(){
 
 //pause the audio
 function pause_audio() {
-  if(document.M_Form.morse.value != ""){
+  if(morse_field.textContent != ""){
 
     console.log("Audio should be paused");
     var play = "<button type='button' class='button' onclick='continue_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
@@ -232,6 +235,8 @@ function sound_creator(tone_length, pause_length) {
 
     if(index == sign_array.length){
         console.log("end");
+        mark();
+        morse_field.contenteditable=true;
         play = "<button type='button' class='button' onclick='init_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
         PlayPause.innerHTML = play;
     }
@@ -250,14 +255,11 @@ function sound_creator(tone_length, pause_length) {
 
 //initialization of audio
 function init_audio() {
-  if(document.M_Form.morse.value != ""){
-    morse = document.M_Form.morse.value;
-
-  
-
-
+  if(morse_field.textContent != ""){ //before: document.M_Form.morse.value
+    morse = morse_field.textContent;
+    //morse = document.M_Form.morse.value;
     sign_array = morse.split("");
-  
+    morse_field.contenteditable = false;
     //console.log("initialized audio");
     index=0;
     
