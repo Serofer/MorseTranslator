@@ -122,7 +122,7 @@ function MorseToAlpha() {
 //translate normal to morse
 function AlphaToMorse() {
   //document.getElementById("alpha").reset();
-  text = alpha_field.textContent;
+  text = alpha_field.textContent.toUpperCase();
   //text = document.A_Form.alpha.value.toUpperCase();
   //document.getElementById("morse").textContent = "";
   for (let char of text) {
@@ -130,9 +130,9 @@ function AlphaToMorse() {
       translation_string += dictionary_A[char] + " ";
     }
   }
-  console.log(translation_string);
+  console.log("Translation:" + translation_string);
 
-  morse_field.innerHTML = translation_string.trim();
+  morse_field.innerHTML = translation_string;
   //document.getElementById("morse").value = translation_string.trim();
   translation_string = "";
 }
@@ -209,6 +209,19 @@ function continue_audio() { //continue the staff: problem with the loop, initial
   }
 }
 
+function stop_audio(){
+    PLAY = false;
+    console.log("end");
+    index=sign_array.length;
+    mark();
+    morse_field.contenteditable=true;
+    play = "<button type='button' class='button' onclick='init_audio()'> <span class='glyphicon glyphicon-play'></span> Play</button>";
+    PlayPause.innerHTML = play;
+    
+    
+
+}
+
 //creates the sound then runs the loop function to generate the next
 //tests if the pause button is pressed.
 function sound_creator(tone_length, pause_length) {
@@ -262,6 +275,7 @@ function init_audio() {
     morse_field.contenteditable = false;
     //console.log("initialized audio");
     index=0;
+    PLAY = true;
     
     var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
     PlayPause.innerHTML = pause;
