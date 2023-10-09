@@ -83,6 +83,10 @@ body{
   height:100px;
   background:#cccccc;
   padding:15px;
+  broder:3px solid blue;
+}
+#alpha:hover, #morse:hover {
+  border:5px solid powderblue;
 }
 
 @media (min-width: 768px) {

@@ -123,6 +123,7 @@ function MorseToAlpha() {
 function AlphaToMorse() {
   //document.getElementById("alpha").reset();
   text = alpha_field.textContent.toUpperCase();
+  console.log(text);
   //text = document.A_Form.alpha.value.toUpperCase();
   //document.getElementById("morse").textContent = "";
   for (let char of text) {
@@ -156,7 +157,6 @@ var current_situation = "loop";
 function mark(){
   console.log("marking");
   //new field with the mark function
-  
   var text = "";
 
   for(let i=0;i<sign_array.length;i++){
@@ -171,15 +171,6 @@ function mark(){
   }
 
   morse_field.innerHTML = text;
-
-  
-  //trying it with github library
-  let tarea = document.getElementById("morse");
-  let hilite = new textHighlight(tarea);
-
-
-
-  //mark.js
 }
 
 //pause the audio
