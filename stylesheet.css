@@ -67,7 +67,7 @@ body{
 }
 #play_pause, #stop, #download, #reset {
   display:inline-block;
-  width:70px;
+  width:60px;
   margin:10px;
 
 }
@@ -115,9 +115,7 @@ body{
     flex-direction: row;
     justify-content: space-between;
   }
-  #template {
-    grid-template-columns:1fr;
-  }
+  
   #explanation, #tool {
     width: 48%;
   }
@@ -126,5 +124,8 @@ body{
 @media (max-width: 767px) {
   #explanation, #tool, #boxes, #custom{
     width: 100%;
+  }
+  #template {
+    grid-template-columns:1fr;
   }
 }
