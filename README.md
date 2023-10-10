@@ -7,11 +7,12 @@ It has already following features:
 <li>translating alhpanumeric to morse and back</li>
 <li>generating an audio of the morse code</li>
 <li>adjusting how many words per minute for the audio</li>
-<li>pausing and resuming the audio</li>
+<li>pausing, resuming and stopping the audio</li>
+<li>marking the current position of the audio</li>
 </ul>
 To be implemented:
 <ul>
   <li>donwloadable audio file</li>
-  <li>marking the current position of the audio</li>
+ 
   <li>better design</li>
 </ul>
