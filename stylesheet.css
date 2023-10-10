@@ -37,8 +37,7 @@ body{
   grid-template-columns: repeat(2, 1fr);
 }
 #custom {
-  width:40%;
-  margin:1%;
+  width:95%;
 }
 
 #explanation h2,
@@ -56,7 +55,7 @@ body{
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width:40%;
+  width:95%;
   margin: 1%;
 }
 
