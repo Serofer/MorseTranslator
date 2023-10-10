@@ -171,79 +171,62 @@
                     <td>--..</td>
                 </tr>
             </table>
-
         </div>
+
         <div id="tool">
             <h2>Morsecode praktisch üben und anwenden</h2>
             <br>
             <p>Hier kannst du mittels diesem Tool selbst Morsecode generieren lassen, zurück übersetzen und den Ton
                 abspielen. Mithilfe der Sliders kannst du diverse Einstellungen vornehmen. Viel Spass : &#41;</p>
             <br>
-
             <br>
-            <div id="boxes">
+            <div id="template">
+                <div id="boxes">
+                    <div id="alpha" contenteditable="true"></div>
+                    <input class="button_translate" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
+                    <div id="morse" contenteditable="true"></div>
+                    <input class="button_translate" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
+                </div>
+                <br>
+                <p>Hier kannst du die Einstellungen für die Tonlänge ändern und dir nach dem generieren des Morse-Codes
+                    kannst du dir die Audio-Datei anhören.</p>
+                <br>
 
-                <!--<form name="A_Form" action="">
-                    <textarea name="alphabetic" id="alpha" cols="30" rows="10"></textarea>
-                    <br>
-                    <input class="button" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
-                </form>
-                <form name="M_Form" action="">
-                    <textarea name="morsecode" id="morse" cols="30" rows="10"></textarea>
-                    <br>
-                    <input class="button" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
-                </form>-->
-
-                <div id="alpha" contenteditable="true"></div>
-                <input class="button_translate" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
-                <div id="morse" contenteditable="true"></div>
-                <input class="button_translate" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
-
-            </div>
-            <br>
-            <p>Hier kannst du die Einstellungen für die Tonlänge ändern und dir nach dem generieren des Morse-Codes
-                kannst du dir die Audio-Datei anhören.</p>
-            <br>
-            <div class="slidecontainer">
-                <div id="WordsPerMinute">
-                    <p>Wörter pro Minute</p>
-                    <br>
-                    <input type="range" min="1" max="60" class="slider" id="WPM">
-                    <br>
-                    <p>Value: <span id="WPM_value">30</span> wpm</p>
+                <div id="custom">
+                    <div class="slidecontainer">
+                        <div id="WordsPerMinute">
+                            <p>Wörter pro Minute</p>
+                            <br>
+                            <input type="range" min="1" max="60" class="slider" id="WPM">
+                            <br>
+                            <p>Value: <span id="WPM_value">30</span> wpm</p>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <div id="play_pause">
+                        <button type="button" class="button" onclick="init_audio()">
+                            <span class="glyphicon glyphicon-play"></span> Play
+                        </button>
+                        </div>
+                        <div id="stop">
+                            <button type="button" class="button" onclick="stop_audio()">
+                                <span class="glyphicon glyphicon-stop"></span> Stop
+                            </button>
+                            <br>
+                        </div>
+                        <div id="reset">
+                            <input class="button" type="button" value="Reset" onclick="reset_fields()">
+                        
+                        </div>  
+                        <div id="download">
+                            <input class="button" type="button" value="Download" onclick="download_audio()">
+                        </div>
+                    </div>
                 </div>
-                 <!--<div id="Word_Pause">
-                    <p>Pause zwischen Wörtern</p>
-                    <br>
-                   <input type="range" min="0" max="2000" class="slider" id="word">
-                    <br>
-                    <p>Value: <span id="word_value"></span> ms</p>
-                    <br>
-                </div>-->
-            </div>
-            <div class="buttons">
-                <div id="play_pause">
-                <button type="button" class="button" onclick="init_audio()">
-                    <span class="glyphicon glyphicon-play"></span> Play
-                  </button>
-                </div>
-                <div id="stop">
-                    <button type="button" class="button" onclick="stop_audio()">
-                        <span class="glyphicon glyphicon-stop"></span> Stop
-                      </button>
-                      <br>
-                </div>
-                <div id="download">
-                    <input class="button" type="button" value="Download" onclick="download_audio()">
-                </div>
-                
             </div>
         </div>
     </div>
-
-
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 <script src="script.js"></script>
-
 </html>

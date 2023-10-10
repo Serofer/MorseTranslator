@@ -99,15 +99,9 @@ const dictionary_B = {
 };
 //translate Morse to normal
 function MorseToAlpha() {
-  //document.A_Form.alpha.value = "";
-  //document.getElementById("A_Form").reset();
-  
-  
-  //morse = document.M_Form.morse.value;
+  translated_morse = "";
   morse = morse_field.textContent;
-
   code_array = morse.split(" ");
-
   for (let j = 0; j < code_array.length; j++) {
     if (dictionary_B[code_array[j]]) {
       translated_morse += dictionary_B[code_array[j]];
@@ -115,17 +109,13 @@ function MorseToAlpha() {
   }
   console.log(translated_morse);
   alpha_field.innerHTML = translated_morse;
-  //document.getElementById("alpha").value = translated_morse.trim();
   translated_morse = "";
 }
-
 //translate normal to morse
 function AlphaToMorse() {
-  //document.getElementById("alpha").reset();
+  translation_string = "";
   text = alpha_field.textContent.toUpperCase();
   console.log(text);
-  //text = document.A_Form.alpha.value.toUpperCase();
-  //document.getElementById("morse").textContent = "";
   for (let char of text) {
     if (dictionary_A[char]) {
       translation_string += dictionary_A[char] + " ";
@@ -139,19 +129,19 @@ function AlphaToMorse() {
 }
 
 //everything for the AUDIO ----------------------------------------------------------------------------------------------------------------
-
-
 var index = 0;
 var unit = 0;
 var tone = unit;
-// console.log(unit);
 var pause = unit;
 
 var PlayPause = document.getElementById("play_pause");
 var PLAY = true;
 var current_situation = "loop";
-
-
+//reset both fields
+function reset_field(){
+  morse_field.innerHTML = "";
+  alpha_field.innerHTML = "";
+}
 //mark the current position during audio
 
 function mark(){
