@@ -138,7 +138,7 @@ var PlayPause = document.getElementById("play_pause");
 var PLAY = true;
 var current_situation = "loop";
 //reset both fields
-function reset_field(){
+function reset_fields(){
   morse_field.innerHTML = "";
   alpha_field.innerHTML = "";
 }
