@@ -1,7 +1,7 @@
 # MorseTranslator
 
 This is a web page to translate morse code. It is a part of my
-project Rekrutenbehelf</a>.
+project <a href="https://github.com/Serofer/Rekrutenbehelf"> Rekrutenbehelf</a>.
 <br>
 It has already following features:
 
