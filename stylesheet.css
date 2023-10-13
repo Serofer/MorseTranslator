@@ -10,8 +10,6 @@ header {
   padding: 20px;
 }
 
-
-
 #container {
   display: flex;
   flex-direction: column;
@@ -19,7 +17,7 @@ header {
   padding: 20px;
 }
 
-body{
+body {
   background-image: url(camouflage.jpg);
 }
 
@@ -33,11 +31,11 @@ body{
   box-sizing: border-box;
 }
 #template {
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 #custom {
-  width:95%;
+  width: 95%;
 }
 
 #explanation h2,
@@ -55,29 +53,29 @@ body{
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width:95%;
+  width: 95%;
   margin: 1%;
 }
 
 .button {
-  padding: 1%;
+  padding: 4%;
   font-size: 16px;
-  min-width:150px;
-
+  min-width: 80px;
 }
-#play_pause, #stop, #download, #reset {
-  display:inline-block;
-  width:60px;
-  margin:10px;
-
+#play_pause,
+#stop,
+#download,
+#reset {
+  display: inline-block;
+  margin: 1%;
 }
 
 .button_translate {
   padding: 1%;
   font-size: 16px;
-  width:30%;
-  min-width:150px;
-  float:left;
+  width: 70%;
+  min-width: 200px;
+  float: left;
 }
 
 .slidecontainer {
@@ -93,21 +91,23 @@ body{
 }
 
 #high {
-  display:inline;
-  background-color: #FFFF00;
+  display: inline;
+  background-color: #ffff00;
 }
 
-#alpha, #morse {
+#alpha,
+#morse {
   font-size: 16px;
-  width:40%;
-  aspect-ratio:2/1;
-  background:#cccccc;
-  padding:15px;
-  border:3px solid blue;
-  overflow:auto;
+  width: 95%;
+  aspect-ratio: 2/1;
+  background: #cccccc;
+  padding: 15px;
+  border: 3px solid blue;
+  overflow: auto;
 }
-#alpha:hover, #morse:hover {
-  border:3px solid powderblue;
+#alpha:hover,
+#morse:hover {
+  border: 3px solid powderblue;
 }
 
 @media (min-width: 768px) {
@@ -115,17 +115,24 @@ body{
     flex-direction: row;
     justify-content: space-between;
   }
-  
-  #explanation, #tool {
+
+  #explanation,
+  #tool {
     width: 48%;
   }
 }
 
 @media (max-width: 767px) {
-  #explanation, #tool, #boxes, #custom{
+  #explanation,
+  #tool,
+  #boxes,
+  #custom {
     width: 100%;
   }
+}
+
+@media (max-width: 1100px) {
   #template {
-    grid-template-columns:1fr;
+    grid-template-columns: 1fr;
   }
 }

@@ -8,13 +8,13 @@
     <link rel="icon" type="image/x-icon" href="/pngegg.ico">
     <link rel="stylesheet" href="stylesheet.css" />
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -185,11 +185,15 @@
                     <div id="alpha" contenteditable="true"></div>
                     <input class="button_translate" type="button" value="Translate to Morse" onclick="AlphaToMorse()">
                     <div id="morse" contenteditable="true"></div>
-                    <input class="button_translate" type="button" value="Translate to Alphanumeric" onclick="MorseToAlpha()">
+                    <input class="button_translate" type="button" value="Translate to Alphanumeric"
+                        onclick="MorseToAlpha()">
+                    <br>
                 </div>
-                <br>
+
+
                 <div id="custom">
-                    <p>Hier kannst du die Einstellungen für die Tonlänge ändern und dir nach dem generieren des Morse-Codes
+                    <p>Hier kannst du die Einstellungen für die Tonlänge ändern und dir nach dem generieren des
+                        Morse-Codes
                         kannst du dir die Audio-Datei anhören.</p>
                     <br>
                     <div class="slidecontainer">
@@ -203,9 +207,9 @@
                     </div>
                     <div class="buttons">
                         <div id="play_pause">
-                        <button type="button" class="button" onclick="init_audio()">
-                            <span class="glyphicon glyphicon-play"></span> Play
-                        </button>
+                            <button type="button" class="button" onclick="init_audio()">
+                                <span class="glyphicon glyphicon-play"></span> Play
+                            </button>
                         </div>
                         <div id="stop">
                             <button type="button" class="button" onclick="stop_audio()">
@@ -215,8 +219,8 @@
                         </div>
                         <div id="reset">
                             <input class="button" type="button" value="Reset" onclick="reset_fields()">
-                        
-                        </div>  
+
+                        </div>
                         <div id="download">
                             <input class="button" type="button" value="Download" onclick="download_audio()">
                         </div>
@@ -228,4 +232,5 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
 <script src="script.js"></script>
+
 </html>
