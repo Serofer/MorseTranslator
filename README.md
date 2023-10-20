@@ -6,7 +6,7 @@ project <a href="https://github.com/Serofer/Rekrutenbehelf"> Rekrutenbehelf</a>.
 It has already following features:
 
 <ul>
-<li>translating alhpanumeric to morse and back</li>
+<li>translating alphanumeric to morse and back</li>
 <li>generating an audio of the morse code</li>
 <li>adjusting how many words per minute for the audio</li>
 <li>pausing, resuming and stopping the audio</li>
@@ -15,6 +15,4 @@ It has already following features:
 To be implemented:
 <ul>
   <li>donwloadable audio file</li>
- 
-  <li>better design</li>
 </ul>
