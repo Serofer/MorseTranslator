@@ -261,6 +261,8 @@ function init_audio() {
     var pause = "<button type='button' class='button' onclick='pause_audio()'> <span class='glyphicon glyphicon-pause'></span> Pause</button>";
     PlayPause.innerHTML = pause;
     unit = 60000 / (50 * slider_wpm.value);
+    console.log(slider_wpm.value);
+    console.log(unit);
   
   
     //for the sound
