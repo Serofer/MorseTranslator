@@ -356,11 +356,12 @@ var sign_array = morse.split("");
 
 
 //CHatgpt version
-
-const Tone = require('tone');
+console.log("In fucntion");
+const Tone = require('tone');//error message
 
 // Erstellen Sie den Synthesizer
 const synth = new Tone.Synth().toMaster();
+
 
 // Definieren Sie die Einstellungen für den Synthesizer
 synth.oscillator.type = 'sine';
