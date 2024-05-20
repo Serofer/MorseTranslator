@@ -307,89 +307,185 @@ function looping() {
 
 //should produce an audio file to download via recorder.start() from Tone.js
 function download_audio() {
-
-/*
-var delay = 0;
-var unit = 60 / (50 * slider_wpm.value);
-var tone_length = unit;
-morse = document.M_Form.morse.value;
-const synth = new Tone.Synth().toDestination().toFrequency();
-const now = Tone.now()
-var sign_array = morse.split("");
-
-  function produce(length, delay) {
-    synth.triggerAttackRelease(400, length, now +delay);
-  }
-
-  recorder.start();
-  for(let i = 0; i < sign_array.length; i++)
-  {
-    if(sign_array[i] == "."){
-      tone_length = unit;
-      delay += 2* unit;
-      produce(unit, delay);
+  var sign_array = [];
+    if(morse_field.textContent != "") {
+        morse = morse_field.textContent;
+        sign_array = morse.split("");
+        console.log(sign_array);
     }
-    if(sign_array[i] == "-"){
-      tone_length = 3* unit;
-      delay += 4*unit;
-  }
-  else if (sign_array[i] == " ") {
-    if (sign_array[i + 1] == "/" || sign_array[i - 1] == "/") {
-      //do nothing
-    } else {
-      delay += 2 * unit;
+    //set variables to count the symbols in the morse code
+    var dot_count = 0;
+    var line_count = 0;
+    var pause_count = 0;
+    var word_count = 0;
+    var sign_count = 0;
+
+    var pause = false;
+    
+    for (let i = 0; i < sign_array.length; i++) {//count the symbols in the morse code
+        if (sign_array[i] == ".") {
+            dot_count++;
+            sign_count++;
+        } else if (sign_array[i] == "-") {
+            line_count++;
+            sign_count++;
+        } else if (sign_array[i] == " " && sign_array[i + 1] != "/" && sign_array[i - 1] != "/") {
+            pause_count++;
+        } else if (sign_array[i] == "/") {
+            word_count++;
+        }
     }
-  } else if (sign_array[i] == "/") {
-    delay += 6 * unit;
-  }
 
-  setTimeout(async () => {
-    // the recorded audio is returned as a blob
-    const recording = await recorder.stop();
-    // download the recording by creating an anchor element and blob url
-    const url = URL.createObjectURL(recording);
-    const anchor = document.createElement("a");
-    anchor.download = "recording.webm";
-    anchor.href = url;
-    anchor.click();
-  }, 4000);
-}*/
+    console.log(dot_count, line_count, pause_count, word_count);//works perfectly
+    //self defined variables
+    var unit = 0;
+    var progress = 0;
+    slider_value = slider_wpm.value;
+    unit = 60000 / (50 * 1000 * slider_value);//time in milliseconds
+    console.log(unit);
 
 
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Create an audio buffer with a length enough to hold the sound
+    const sampleRate = audioContext.sampleRate;//sampleRate = 1 second
+    const beepLength = 3 * sampleRate;
+    const real_unit = unit * sampleRate;
+    console.log(real_unit);
+    const short = real_unit;
+    const long = 3 * real_unit;
+    const sign_pause = real_unit;
+    const short_pause = 3 * real_unit;
+    const long_pause = 7 * real_unit;
+    const breakLength = 2 * sampleRate; // 2 seconds
+    
 
-//CHatgpt version
-console.log("In fucntion");
-const Tone = require('tone');//error message
+    const totalLength = (beepLength * 2) + breakLength;
+    const TOTAL_LENGTH = (short * dot_count) + (long * line_count) + (short_pause * pause_count) + (long_pause * word_count) + (sign_pause * sign_count);//set the length of the buffer
 
-// Erstellen Sie den Synthesizer
-const synth = new Tone.Synth().toMaster();
+    
+    const buffer = audioContext.createBuffer(1, totalLength, sampleRate);
+    const BUFFER = audioContext.createBuffer(1, TOTAL_LENGTH, sampleRate);
+    const channelData = buffer.getChannelData(0);
+    const CHANNEL_DATA = BUFFER.getChannelData(0);
 
 
-// Definieren Sie die Einstellungen für den Synthesizer
-synth.oscillator.type = 'sine';
-synth.envelope.attack = 0.2;
-synth.envelope.decay = 0.1;
-synth.envelope.sustain = 0.5;
-synth.envelope.release = 1;
 
-// Spielen Sie einen einzelnen Ton
-synth.triggerAttackRelease('C4', '4n', Tone.now());
 
-// Generieren Sie die Audio-Datei
-const buffer = new Tone.Buffer().toDestination();
-Tone.Offline(() => {
-  // Spielen Sie den Ton
-  synth.triggerAttackRelease('C4', '4n', 0);
-}, '4n').then(buffer => {
-  // Exportieren Sie die generierte Audio-Datei
-  Tone.Buffer.exportToWav(buffer).then(data => {
-    const url = Tone.Buffer.toBlobURL(data);
+    var sign_counter = 0;
+    //Loop for every sign
+    for (let i = 0; i < sign_array.length; i++) {
+
+        var sign = 0;//set variable to declare soundlength to be added
+
+        if (sign_array[i] == ".") {
+            sign = short;
+            pause = false;
+        }
+        if (sign_array[i] == "-") {
+            sign = long;
+            pause = false;
+        }
+        if (sign_array[i] == " " && sign_array[i + 1] != "/")  {
+            sign = short_pause;
+            pause = true;
+            console.log("short pause");
+        }
+        if (sign_array[i] == " " && sign_array[i + 1] == "/")  {
+            sign = long_pause;
+            console.log("long pause");
+            pause = true;
+            i += 2;
+       
+        }
+        
+        if ((sign == short || sign == long) && !pause) {
+            sign_counter++;
+            for (let j = progress; j < (progress + sign); j++) {
+             CHANNEL_DATA[j] = Math.sin(2 * Math.PI * 440 * j / sampleRate) 
+            }
+            progress = progress + sign + sign_pause;
+        }
+
+        else {
+            progress += sign;
+        }
+        
+    }
+    
+    // Convert the buffer to a WAV file
+    const wav = audioBufferToWav(BUFFER);
+    const blob = new Blob([wav], { type: 'audio/wav' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create a link to download the file
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'synth_tone.wav';
+    link.download = 'beep.wav';
+    document.body.appendChild(link);
     link.click();
-  });
-});
+    document.body.removeChild(link);
+}
+
+// Function to convert an AudioBuffer to a WAV file
+function audioBufferToWav(buffer) {
+    const numOfChan = buffer.numberOfChannels;
+    const length = buffer.length * numOfChan * 2 + 44;
+    const bufferLength = buffer.length;
+    const result = new ArrayBuffer(length);
+    const view = new DataView(result);
+    
+    let channels = [];
+    let i;
+    let sample;
+    let offset = 0;
+    let pos = 0;
+
+    // Write WAVE header
+    setUint32(0x46464952); // "RIFF"
+    setUint32(length - 8); // file length - 8
+    setUint32(0x45564157); // "WAVE"
+
+    setUint32(0x20746d66); // "fmt " chunk
+    setUint32(16); // length = 16
+    setUint16(1); // PCM (uncompressed)
+    setUint16(numOfChan);
+    setUint32(buffer.sampleRate);
+    setUint32(buffer.sampleRate * 2 * numOfChan); // avg. bytes/sec
+    setUint16(numOfChan * 2); // block-align
+    setUint16(16); // 16-bit (hardcoded in this demo)
+
+    setUint32(0x61746164); // "data" - chunk
+    setUint32(length - pos - 4); // chunk length
+
+    // Write interleaved data
+    for (i = 0; i < buffer.numberOfChannels; i++) {
+        channels.push(buffer.getChannelData(i));
+    }
+
+    while (pos < bufferLength) {
+        for (i = 0; i < numOfChan; i++) {
+            sample = Math.max(-1, Math.min(1, channels[i][pos])); // clamp
+            sample = (sample < 0 ? sample * 32768 : sample * 32767) | 0; // scale to 16-bit signed int
+            view.setInt16(offset, sample, true); // write 16-bit sample
+            offset += 2;
+        }
+        pos++;
+    }
+
+    return result;
+
+    function setUint16(data) {
+        view.setUint16(offset, data, true);
+        offset += 2;
+    }
+
+    function setUint32(data) {
+        view.setUint32(offset, data, true);
+        offset += 4;
+    }
+
+
 }
 
 
