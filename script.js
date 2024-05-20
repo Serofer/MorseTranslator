@@ -16,6 +16,7 @@ var wpm = 30;
 slider_wpm.value = 30;
 output_wpm.innerHTML = slider_wpm.value;
 
+
 //output_wpm.innerHTML = display_value(slider_wpm, output_wpm, wpm);
 
 
