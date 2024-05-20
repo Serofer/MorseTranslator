@@ -220,7 +220,7 @@ function sound_creator(tone_length, pause_length) {
     }
     
     index++; //increase the value anyways to to to next position
-    const oscillator = new Tone.Oscillator(440, "sine").toDestination();
+    const oscillator = new Tone.Oscillator(600, "sine").toDestination();
     //sound creation
     oscillator.start();
     setTimeout(() => {
@@ -402,7 +402,7 @@ function download_audio() {
         if ((sign == short || sign == long) && !pause) {
             sign_counter++;
             for (let j = progress; j < (progress + sign); j++) {
-             CHANNEL_DATA[j] = Math.sin(2 * Math.PI * 440 * j / sampleRate) 
+             CHANNEL_DATA[j] = Math.sin(2 * Math.PI * 600 * j / sampleRate) 
             }
             progress = progress + sign + sign_pause;
         }
