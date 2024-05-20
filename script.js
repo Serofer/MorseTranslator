@@ -9,16 +9,16 @@ alpha_field = document.getElementById("alpha");
 
 //slider information
 var slider_wpm = document.getElementById("WPM");
-var slider_word = document.getElementById("word");
 var output_wpm = document.getElementById("WPM_value");
 var output_word = document.getElementById("word_value");
 var wpm = 30;
 
-
+slider_wpm.value = 30;
+output_wpm.innerHTML = slider_wpm.value;
 //var word_pause = 1000;
-output_wpm.innerHTML = display_value(slider_wpm, output_wpm, wpm);
+//output_wpm.innerHTML = display_value(slider_wpm, output_wpm, wpm);
 
-//output_word.innerHTML = display_value(slider_word, output_word, word_pause);
+
 
 function display_value(slider, output, LENGTH_VALUE) {
   slider.oninput = function () {
@@ -26,6 +26,8 @@ function display_value(slider, output, LENGTH_VALUE) {
     LENGTH_VALUE = slider.value;
   };
 }
+
+display_value(slider_wpm, output_wpm, wpm);
 //without a function ends here
 
 const dictionary_A = {
